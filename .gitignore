@@ -1,0 +1,8 @@
+# Project exclude paths
+/commands/target/
+/EventManager/target/
+/inventory/target/
+/Messages/target/
+/storage/target/
+/target/
+/utils/target/
