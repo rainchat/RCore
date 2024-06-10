@@ -16,7 +16,7 @@
         <module>commands</module>
         <module>storage</module>
         <module>inventory</module>
-
+        <module>MenuModule</module>
         <module>RLib</module>
     </modules>
 

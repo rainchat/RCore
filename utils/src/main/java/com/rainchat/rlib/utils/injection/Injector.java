@@ -25,7 +25,7 @@ public class Injector {
                     Object[] initargs = new Object[paramTypes.length];
 
                     for (int i = 0; i < paramTypes.length; i++) {
-                        Object arg = context.get(paramTypes[i]);
+                        Object arg = getBind(paramTypes[i]);
                         if (arg == null) {
                             throw new IllegalArgumentException("No bound instance for " + paramTypes[i].getName());
                         }
@@ -39,6 +39,10 @@ public class Injector {
             e.printStackTrace();
         }
         throw new IllegalArgumentException("No suitable constructor found for " + clazz.getName());
+    }
+
+    public <T> T getBind(Class<T> clazz) {
+        return context.get(clazz);
     }
 
 }
