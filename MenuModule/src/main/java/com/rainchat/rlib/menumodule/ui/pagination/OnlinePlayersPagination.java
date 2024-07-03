@@ -1,7 +1,9 @@
 package com.rainchat.rlib.menumodule.ui.pagination;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.rainchat.rlib.menumodule.builders.ButtonBuilder;
 import com.rainchat.rlib.menumodule.ui.buttons.SelectionButton;
+import com.rainchat.rlib.menumodule.ui.buttons.SimpleItem;
 import com.rainchat.rlib.menumodule.ui.inventorys.SimpleMenu;
 import com.rainchat.rlib.menumodule.ui.placeholder.TargetPlaceholder;
 import com.rainchat.rlib.inventory.items.BaseItem;
@@ -13,26 +15,20 @@ import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class OnlinePlayersPagination extends SimplePagination {
-    public SelectionButton pageItem;
+
+    public Map<String, Object> sectionItem = new HashMap<>();
     private final List<BaseClickItem> clickableItems = new ArrayList<>();
 
     public void setFromSection(Map<String, Object> section) {
+        this.sectionItem = section;
         Optional.ofNullable(section.get("slots")).ifPresent((o) -> {
             List<Integer> slots = parsePagination(String.valueOf(o));
 
             this.setItemSlots(slots);
-        });
-        Optional.ofNullable(section.get("page")).ifPresent((o) -> {
-            if (o instanceof Map) {
-                Map<String, Object> item = new CaseInsensitiveStringMap((Map<String, Object>) o);
-                this.pageItem = ButtonBuilder.INSTANCE.getButton(this.getMenu(), "menu_" + Bukkit.getName() + "_button_fill_item", item);
-            }
         });
     }
 
@@ -41,13 +37,8 @@ public class OnlinePlayersPagination extends SimplePagination {
         this.clickableItems.clear();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            SelectionButton clickItem = this.pageItem.clone();
-            BaseItem baseItem = new BaseItem();
+            SelectionButton clickItem = getPageItem();
 
-            pageItem.getBaseItem().getItemModifiers().forEach(baseItem::addItemModifier);
-            baseItem.addItemModifier((new PlayerHeadModifier()).setHead(player.getName()));
-
-            clickItem.setItem(baseItem);
             clickItem.setInventory(getMenu());
 
             List<PlaceholderSupply<?>> supplies = getPlaceholders();
@@ -84,7 +75,20 @@ public class OnlinePlayersPagination extends SimplePagination {
 
     public List<PlaceholderSupply<?>> getPlaceholders() {
         List<PlaceholderSupply<?>> placeholderSupplies = new ArrayList<>();
-        ((SimpleMenu) getMenu()).getPlaceholderSupplies().forEach(placeholder -> placeholderSupplies.add(placeholder));
+        getMenu().getPlaceholders().forEach(placeholder -> placeholderSupplies.add(placeholder));
         return placeholderSupplies;
+    }
+
+    public SelectionButton getPageItem() {
+        AtomicReference<SelectionButton> pageItemRef = new AtomicReference<>();
+
+        Optional.ofNullable(sectionItem.get("page")).ifPresent((o) -> {
+            if (o instanceof Map) {
+                Map<String, Object> item = new CaseInsensitiveStringMap((Map<String, Object>) o);
+                pageItemRef.set(ButtonBuilder.INSTANCE.getButton(this.getMenu(), "menu_" + Bukkit.getName() + "_button_fill_item", item));
+            }
+        });
+
+        return pageItemRef.get();
     }
 }

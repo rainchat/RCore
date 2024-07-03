@@ -63,4 +63,12 @@ public abstract class RainPlugin extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(inject(clazz), this);
     }
 
+    public Injector getInjector() {
+        return injector;
+    }
+
+    public CommandController getCommandController() {
+        return commandController;
+    }
+
 }

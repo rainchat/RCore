@@ -1,6 +1,7 @@
 package com.rainchat.rlib.utils.injection;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 public class Injector {
     private final Context context;
@@ -32,7 +33,9 @@ public class Injector {
                         initargs[i] = arg;
                     }
 
-                    return clazz.cast(constructor.newInstance(initargs));
+                    T instance = clazz.cast(constructor.newInstance(initargs));
+                    injectDependencies(instance); // Inject dependencies into fields
+                    return instance;
                 }
             }
         } catch (Exception e) {
@@ -45,5 +48,21 @@ public class Injector {
         return context.get(clazz);
     }
 
+    public void injectDependencies(Object instance) {
+        Class<?> clazz = instance.getClass();
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Dependency.class)) {
+                Object dependency = getBind(field.getType());
+                if (dependency == null) {
+                    throw new IllegalArgumentException("No bound instance for " + field.getType().getName());
+                }
+                field.setAccessible(true);
+                try {
+                    field.set(instance, dependency);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
-

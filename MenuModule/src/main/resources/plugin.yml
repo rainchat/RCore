@@ -1,4 +1,0 @@
-name: MenuModule
-version: '${project.version}'
-main: com.rainchat.menumodule.MenuModule
-api-version: '1.20'

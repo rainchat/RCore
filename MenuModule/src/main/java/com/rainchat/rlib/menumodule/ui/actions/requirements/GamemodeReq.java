@@ -10,7 +10,7 @@ public class GamemodeReq extends BaseRequirements {
     }
 
     @Override
-    boolean getRequirement(String string, Player player) {
+    public boolean getRequirement(String string, Player player) {
         return player.getGameMode().equals(GameMode.valueOf(string));
     }
 

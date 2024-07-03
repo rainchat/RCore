@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Messages" />
+        <module name="EventManager" />
+        <module name="utils" />
+        <module name="messages" />
+        <module name="MenuModule" />
         <module name="storage" />
         <module name="inventory" />
-        <module name="EventManager" />
         <module name="commands" />
-        <module name="utils" />
       </profile>
       <profile name="Annotation profile for RCore" enabled="true">
         <sourceOutputDir name="../target/generated-sources/annotations" />

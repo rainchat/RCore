@@ -10,7 +10,7 @@ public class EcoReq extends BaseRequirements {
     }
 
     @Override
-    boolean getRequirement(String string, Player player) {
+    public boolean getRequirement(String string, Player player) {
         if (player == null) {
             return true;
         }

@@ -35,9 +35,9 @@ public abstract class BaseRequirements extends BaseAction {
     @Override
     public void addToTask(UUID uuid, RScheduler scheduler, PaginationMenu menu) {
         // Ищем текст после параметров -e и -s
-        String eText = findParameterText(getString(), "-e");
-        String sText = findParameterText(getString(), "-s");
-        String textWithoutParameters = removeParameters(getString());
+        String eText = findParameterText(getReplacedString(uuid), "-e");
+        String sText = findParameterText(getReplacedString(uuid), "-s");
+        String textWithoutParameters = removeParameters(getReplacedString(uuid));
 
         Player player = Bukkit.getPlayer(uuid);
         if (getRequirement(textWithoutParameters, player)) {
@@ -48,6 +48,6 @@ public abstract class BaseRequirements extends BaseAction {
         }
     }
 
-    abstract boolean getRequirement(String string, Player player);
+    public abstract boolean getRequirement(String string, Player player);
 
 }

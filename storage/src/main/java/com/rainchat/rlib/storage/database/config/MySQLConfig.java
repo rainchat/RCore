@@ -1,6 +1,5 @@
 package com.rainchat.rlib.storage.database.config;
 
-import com.rainchat.rlib.storage.database.config.DatabaseConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -10,9 +9,9 @@ import java.sql.SQLException;
 public class MySQLConfig implements DatabaseConfig {
     private HikariDataSource dataSource;
 
-    public MySQLConfig(String url, String user, String password) {
+    public MySQLConfig(String host, int port, String database, String user, String password) {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(url);
+        config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
         config.setUsername(user);
         config.setPassword(password);
         config.setMaximumPoolSize(50); // Максимальное количество соединений в пуле

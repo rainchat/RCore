@@ -158,8 +158,6 @@ public abstract class BaseDao<T, K> {
             query.append(" WHERE ").append(primaryKeyField.getAnnotation(Column.class).name()).append(" = ?");
         }
 
-        System.out.println("Generated SQL: " + query.toString());
-
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS)) {
             int index = 1;

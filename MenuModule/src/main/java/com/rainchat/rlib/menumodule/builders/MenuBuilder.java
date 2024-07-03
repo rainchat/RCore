@@ -6,6 +6,7 @@ import com.rainchat.rlib.inventory.menus.LiteMenu;
 import com.rainchat.rlib.utils.builder.Builder;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import com.rainchat.rlib.utils.config.Config;
+import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
@@ -16,8 +17,11 @@ public class MenuBuilder extends Builder<Plugin, SimpleMenu> {
 
     public HashMap<String, Map<String, Object>> menus = new HashMap<>();
     private final Plugin plugin;
+    @Getter
+    private static MenuBuilder instance;
 
     public MenuBuilder(Plugin plugin) {
+        instance = this;
         this.plugin = plugin;
         registerDefaultMenus();
     }
@@ -30,7 +34,7 @@ public class MenuBuilder extends Builder<Plugin, SimpleMenu> {
         this.menus.put(name, config.getNormalizedValues(false));
     }
 
-    public LiteMenu getMenu(String name) {
+    public SimpleMenu getMenu(String name) {
         Map<String, Object> keys = new CaseInsensitiveStringMap<>(menus.get(name));
         SimpleMenu menu = Optional.ofNullable(keys.get("menu-settings.menu-type"))
                 .map(String::valueOf)

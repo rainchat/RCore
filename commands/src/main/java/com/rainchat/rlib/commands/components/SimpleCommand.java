@@ -121,12 +121,14 @@ public class SimpleCommand implements CommandExecutor, TabCompleter {
 
         Map.Entry<String[], Integer> bestCompletionsEntry = findBestCompletions(fullCommand, completionMethods);
         String[] bestCompletions = bestCompletionsEntry.getKey();
-        int bestMatchLength = bestCompletionsEntry.getValue()-1;
+        int bestMatchLength = bestCompletionsEntry.getValue();
 
         if (bestCompletions != null) {
             String[] fullCommandParts = fullCommand.split(" ");
-            int completionIndex = bestCompletions.length - fullCommandParts.length + bestMatchLength; // Учитываем длину подкоманды
-            if (completionIndex >= 0 && completionIndex < bestCompletions.length) {
+
+            int completionIndex = fullCommandParts.length - bestMatchLength; // Учитываем длину подкоманды
+
+            if (completionIndex < bestCompletions.length) {
                 String completion = bestCompletions[completionIndex];
                 List<String> suggestions = tabCompleterService.getCompletions(completion, sender, String.class);
                 return filterSuggestions(suggestions, args.length > 0 ? args[args.length - 1] : "");
@@ -181,6 +183,7 @@ public class SimpleCommand implements CommandExecutor, TabCompleter {
 
         return new AbstractMap.SimpleEntry<>(bestCompletions, bestMatchLength);
     }
+
 
     private List<String> getSubcommands(String alias, String[] args, CommandSender sender) {
         List<String> subcommands = new ArrayList<>();

@@ -18,7 +18,10 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class LiteMenu implements InventoryHolder, Listener {
@@ -30,10 +33,12 @@ public class LiteMenu implements InventoryHolder, Listener {
     @Setter@Getter
     private String guiName;
     private HashMap<Integer, BaseClickItem> clickableItems = new HashMap<>();
-    private PlaceholderSupply[] globalReplacers;
+    private List<PlaceholderSupply<?>> globalPlaceholder;
+    private HashMap<String,String> parameters;
     private BukkitTask update;
 
     public LiteMenu(Plugin plugin, String name, int size) {
+        this.globalPlaceholder = new ArrayList<>();
         this.inventory = Bukkit.createInventory(this, size * 9, name);
         this.clickableItems = new HashMap<>();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -43,11 +48,35 @@ public class LiteMenu implements InventoryHolder, Listener {
         this.inventory = Bukkit.createInventory(this, guiSize * 9, guiName);
     }
 
-    public void setGlobalReplacers(PlaceholderSupply<?>... replacementSource) {
-        this.globalReplacers = replacementSource;
+    public List<PlaceholderSupply<?>> getPlaceholders() {
+        return globalPlaceholder;
+    }
+
+    public void setPlaceholders(List<PlaceholderSupply<?>> globalPlaceholder) {
+        this.globalPlaceholder = globalPlaceholder;
+    }
+
+    // Метод для добавления одной записи
+    public void addParameter(String key, String value) {
+        if (key != null && value != null) {
+            parameters.put(key, value);
+        }
+    }
+
+    // Метод для получения всего списка
+    public HashMap<String, String> getParameters() {
+        return new HashMap<>(parameters);
+    }
+
+    // Метод для добавления списка записей
+    public void addParameters(Map<String, String> newParameters) {
+        if (newParameters != null) {
+            parameters.putAll(newParameters);
+        }
     }
 
     public void open(Player player) {
+        setupItems();
         player.openInventory(inventory);
     }
 
@@ -72,6 +101,16 @@ public class LiteMenu implements InventoryHolder, Listener {
     }
 
     public void setItem(int slot, BaseClickItem clickableItem) {
+//        if (clickableItem.getItemStack() == null || clickableItem.getItemStack().getType().equals(Material.AIR)) {
+//            this.clickableItems.put(slot, new ClickItem(new ItemBuilder().material(Material.AIR.toString()), inventoryClickEvent -> {}));
+//            this.inventory.setItem(slot, clickableItem.getItemStack());
+//            return;
+//        }
+        this.clickableItems.put(slot, clickableItem);
+        //this.inventory.setItem(slot, clickableItem.getItemStack());
+    }
+
+    public void setItemLoad(int slot, BaseClickItem clickableItem) {
         if (clickableItem.getItemStack() == null || clickableItem.getItemStack().getType().equals(Material.AIR)) {
             this.clickableItems.put(slot, new ClickItem(new ItemBuilder().material(Material.AIR.toString()), inventoryClickEvent -> {}));
             this.inventory.setItem(slot, clickableItem.getItemStack());
@@ -79,6 +118,12 @@ public class LiteMenu implements InventoryHolder, Listener {
         }
         this.clickableItems.put(slot, clickableItem);
         this.inventory.setItem(slot, clickableItem.getItemStack());
+    }
+
+    public void setupItems() {
+        clickableItems.forEach((integer, baseClickItem) -> {
+            this.inventory.setItem(integer, baseClickItem.getItemStack());
+        });
     }
 
     public BaseClickItem getItem(int slot) {
@@ -105,16 +150,20 @@ public class LiteMenu implements InventoryHolder, Listener {
 
             if (event.getClickedInventory() == null) return;
             if (!player.getOpenInventory().getTopInventory().equals(getInventory())) return;
-            //if (!event.getClickedInventory().equals(getInventory())) return;
 
-            BaseClickItem clickableItem = getItem(event.getSlot());
-            if (clickableItem != null) {
-                event.setCancelled(true);
-                Consumer<InventoryClickEvent> clickEventConsumer = clickableItem.getInventoryClickEvent();
-                if (clickEventConsumer != null) {
-                    clickEventConsumer.accept(event);
+            if (event.getClickedInventory().equals(getInventory())) {
+
+                BaseClickItem clickableItem = getItem(event.getSlot());
+                if (clickableItem != null) {
+                    event.setCancelled(true);
+                    Consumer<InventoryClickEvent> clickEventConsumer = clickableItem.getInventoryClickEvent();
+                    if (clickEventConsumer != null) {
+                        clickEventConsumer.accept(event);
+                    }
                 }
+
             }
+
             event.setCancelled(true);
         }
     }

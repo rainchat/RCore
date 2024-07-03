@@ -4,6 +4,7 @@ import com.rainchat.rlib.menumodule.builders.ButtonBuilder;
 import com.rainchat.rlib.menumodule.builders.PaginationBuilder;
 import com.rainchat.rlib.menumodule.builders.PlaceholderBuilder;
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
+import com.rainchat.rlib.menumodule.ui.buttons.SelectionButton;
 import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import org.bukkit.entity.Player;
@@ -51,7 +52,9 @@ public class SimpleMenu extends PaginationMenu {
                         return;
                     }
                     Map<String, Object> item = new CaseInsensitiveStringMap<>((Map<String, Object>) o.getValue());
-                    ButtonBuilder.INSTANCE.getButton(this, "menu_" + getName() + "_button_" + o.getKey(), item);
+                    SelectionButton selectionButton = ButtonBuilder.INSTANCE.getButton(this, "menu_" + getName() + "_button_" + o.getKey(), item);
+                    selectionButton.setInventory(this);
+                    this.setItem(selectionButton.getSlot(), selectionButton);
                 }
 
             } else if (key.equalsIgnoreCase("menu-pagination")) {
@@ -79,22 +82,14 @@ public class SimpleMenu extends PaginationMenu {
 
     @Override
     public void open(Player player) {
-        setPlaceholderSupplies(PlaceholderBuilder.INSTANCE.getPlaceholders(this, player));
+        setPlaceholders(PlaceholderBuilder.INSTANCE.getPlaceholders(this, player));
 
-        getItems().values().forEach(baseClickItem -> baseClickItem.getBaseItem().setStringReplacer(getPlaceholderSupplies()));
+        getItems().values().forEach(baseClickItem -> baseClickItem.getBaseItem().setStringReplacer(getPlaceholders()));
 
         updateInventory();
 
 
         player.openInventory(getInventory());
-    }
-
-    public List<PlaceholderSupply<?>> getPlaceholderSupplies() {
-        return placeholderSupplies;
-    }
-
-    public void setPlaceholderSupplies(List<PlaceholderSupply<?>> placeholderSupplies) {
-        this.placeholderSupplies = placeholderSupplies;
     }
 
 }

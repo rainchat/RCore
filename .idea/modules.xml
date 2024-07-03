@@ -3,11 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EventManager.iml" filepath="$PROJECT_DIR$/EventManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Messages.iml" filepath="$PROJECT_DIR$/Messages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MenuModule/MenuModule.iml" filepath="$PROJECT_DIR$/MenuModule/MenuModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/RCore.iml" filepath="$PROJECT_DIR$/RCore.iml" />
       <module fileurl="file://$PROJECT_DIR$/RLib.iml" filepath="$PROJECT_DIR$/RLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/commands.iml" filepath="$PROJECT_DIR$/commands.iml" />
       <module fileurl="file://$PROJECT_DIR$/inventory.iml" filepath="$PROJECT_DIR$/inventory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Messages/messages.iml" filepath="$PROJECT_DIR$/Messages/messages.iml" />
       <module fileurl="file://$PROJECT_DIR$/storage.iml" filepath="$PROJECT_DIR$/storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
     </modules>

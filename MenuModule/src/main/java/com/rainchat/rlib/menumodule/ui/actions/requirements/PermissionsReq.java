@@ -9,7 +9,7 @@ public class PermissionsReq extends BaseRequirements {
     }
 
     @Override
-    boolean getRequirement(String string, Player player) {
+    public boolean getRequirement(String string, Player player) {
         return player.hasPermission(string);
     }
 

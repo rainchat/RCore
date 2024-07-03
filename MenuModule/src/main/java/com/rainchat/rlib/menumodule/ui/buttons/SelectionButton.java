@@ -7,13 +7,17 @@ import com.rainchat.rlib.inventory.items.ItemModifierBuilder;
 import com.rainchat.rlib.utils.RUtility;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import com.rainchat.rlib.utils.scheduler.RScheduler;
+import lombok.Getter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
 public class SelectionButton extends SimpleItem implements Cloneable {
 
-    private List<Action> actions = new ArrayList<>();
+    private Map<String, List<Action>> actionsMap = new HashMap<>();
+    @Getter
     private int slot;
 
     public void setFromSection(Map<String, Object> section) {
@@ -29,20 +33,30 @@ public class SelectionButton extends SimpleItem implements Cloneable {
         }
 
         setAction(section.get("actions"));
-        getInventory().setItem(slot, this);
+        //getInventory().setItem(slot, this);
     }
 
     private void setAction(Object o) {
-
-
         if (o instanceof Map) {
             Map<String, Object> keys = new CaseInsensitiveStringMap<>((Map<String, Object>) o);
-            actions = Optional.ofNullable(keys.get("left")).map(value ->
-                    ActionBuilder.INSTANCE.getActions(getInventory(), getBaseItem(), value)).orElse(Collections.emptyList());
+            for (ClickType clickType : ClickType.values()) {
+                actionsMap.put(clickType.name().toLowerCase(), Optional.ofNullable(keys.get(clickType.name().toLowerCase()))
+                        .map(value -> ActionBuilder.INSTANCE.getActions(getInventory(), getBaseItem(), value))
+                        .orElse(Collections.emptyList()));
+            }
+            // Устанавливаем действия по умолчанию, если они есть в корне "actions"
+            actionsMap.put("default", Optional.ofNullable(keys.get("default"))
+                    .map(value -> ActionBuilder.INSTANCE.getActions(getInventory(), getBaseItem(), value))
+                    .orElse(Collections.emptyList()));
+        } else {
+            actionsMap.put("default", ActionBuilder.INSTANCE.getActions(getInventory(), getBaseItem(), o));
         }
+
         setInventoryClickEvent(baseClick -> {
             RScheduler scheduler = RUtility.syncScheduler();
+            ClickType clickType = baseClick.getClick();
 
+            List<Action> actions = actionsMap.getOrDefault(clickType.name().toLowerCase(), actionsMap.get("default"));
             actions.forEach(action -> {
                 action.setReplacedString(PlaceholderBuilder.INSTANCE.getPlaceholders(getInventory(), (Player) baseClick.getWhoClicked()));
                 action.addToTask(baseClick.getWhoClicked().getUniqueId(), scheduler, getInventory());
@@ -50,6 +64,11 @@ public class SelectionButton extends SimpleItem implements Cloneable {
         });
     }
 
+    @Override
+    public ItemStack getItemStack() {
+        actionsMap.values().forEach(actions -> actions.forEach(action -> action.setItem(getBaseItem())));
+        return super.getItemStack();
+    }
 
     @Override
     public SelectionButton clone() {

@@ -4,12 +4,12 @@ import com.rainchat.rlib.inventory.items.BaseItem;
 import com.rainchat.rlib.inventory.items.ItemBuilder;
 import com.rainchat.rlib.inventory.pagination.BasePagination;
 import com.rainchat.rlib.inventory.pagination.SimplePagination;
+import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PaginationMenu extends LiteMenu {
     private SimplePagination paginationItems;
@@ -31,13 +31,12 @@ public class PaginationMenu extends LiteMenu {
         for (int slot = 0; slot < getInventory().getSize(); slot++) {
             if (paginationItems.getItemSlots().contains(slot)) continue;
             if (getItem(slot) != null) continue;
-            this.setItem(slot, clickableItem);
+            this.setItemLoad(slot, clickableItem);
         }
     }
 
     public void setPageItems(SimplePagination paginationItems) {
         this.paginationItems = paginationItems;
-        this.updateInventory();
     }
 
     public boolean updateInventory() {
@@ -47,7 +46,7 @@ public class PaginationMenu extends LiteMenu {
         setupPages();
 
         for (var entryMap : getItems().entrySet()) {
-            this.setItem(entryMap.getKey(), entryMap.getValue());
+            this.setItemLoad(entryMap.getKey(), entryMap.getValue());
         }
 
 
@@ -73,13 +72,19 @@ public class PaginationMenu extends LiteMenu {
         int m = 0;
         for (; first < last; first++) {
             BaseClickItem clickableItem = (clickableItemSize > first) ? paginationItems.getPaginationItems().get(first) : new EmptyItem();
-            this.setItem(paginationItems.getItemSlots().get(m), clickableItem);
+            this.setItemLoad(paginationItems.getItemSlots().get(m), clickableItem);
             m++;
         }
     }
 
     public void clearPages() {
-        paginationItems.getItemSlots().forEach(integer -> this.setItem(integer, new EmptyItem()));
+        paginationItems.getItemSlots().forEach(integer -> this.setItemLoad(integer, new EmptyItem()));
+    }
+
+    @Override
+    public void open(Player player) {
+        updateInventory();
+        super.open(player);
     }
 
 

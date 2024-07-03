@@ -19,14 +19,7 @@ public final class TypeParserService {
         registerParser(Long.TYPE, Long::parseLong);
         registerParser(Double.TYPE, Double::parseDouble);
         registerParser(String.class, (string) -> string);
-        registerParser(Player.class, (string) -> {
-            Player p = Bukkit.getPlayer(string);
-            if (p == null) {
-                throw new IllegalArgumentException("There is no online player with the name \"" + string + "\"");
-            } else {
-                return p;
-            }
-        });
+        registerParser(Player.class, Bukkit::getPlayer);
     }
 
     private static Object parseEnum(Class<?> enumType, String arg) {
@@ -44,11 +37,15 @@ public final class TypeParserService {
 
     public Object parseObject(Class<?> type, String parse) {
         Parser objParser = parsers.get(type);
-        if (objParser != null) {
-            return objParser.parseObject(parse);
-        }
-        if (type.isEnum()) {
-            return parseEnum(type, parse);
+        try {
+            if (objParser != null) {
+                return objParser.parseObject(parse);
+            }
+            if (type.isEnum()) {
+                return parseEnum(type, parse);
+            }
+        } catch (Exception e) {
+            return null;
         }
         throw new IllegalArgumentException("No registered parser for " + type.getCanonicalName() + ".");
     }

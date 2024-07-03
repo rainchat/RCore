@@ -20,10 +20,9 @@ public class TestPagination extends OnlinePlayersPagination {
 
         for (int i = 1; i < 50; i++) {
 
-            SelectionButton clickItem = pageItem.clone();
-            BaseItem baseItem = new BaseItem();
+            SelectionButton clickItem = getPageItem();
+            BaseItem baseItem = clickItem.getBaseItem();
 
-            pageItem.getBaseItem().getItemModifiers().forEach(baseItem::addItemModifier);
             baseItem.addItemModifier((new AmountModifier()).setAmount(i));
             baseItem.addItemModifier(new MaterialModifier().setMaterial(Material.ACACIA_BUTTON));
 
@@ -31,7 +30,6 @@ public class TestPagination extends OnlinePlayersPagination {
             clickItem.setInventory(getMenu());
 
             List<PlaceholderSupply<?>> supplies = getPlaceholders();
-            //supplies.add(new TargetPlaceholder(player));
 
             clickItem.getBaseItem().setStringReplacer(supplies);
 

@@ -10,7 +10,7 @@ public class LevelReq extends BaseRequirements {
     }
 
     @Override
-    boolean getRequirement(String string, Player player) {
+    public boolean getRequirement(String string, Player player) {
         return player.getLevel() >= Integer.parseInt(string)
                 || player.getGameMode().equals(GameMode.CREATIVE);
     }
