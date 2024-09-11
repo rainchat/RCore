@@ -1,16 +1,12 @@
 package com.rainchat.rlib.menumodule.ui.actions;
 
-import com.rainchat.rlib.inventory.items.BaseItem;
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
 import com.rainchat.rlib.menumodule.builders.MenuBuilder;
 import com.rainchat.rlib.menumodule.ui.inventorys.SimpleMenu;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
 import com.rainchat.rlib.utils.scheduler.RScheduler;
 import org.bukkit.Bukkit;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

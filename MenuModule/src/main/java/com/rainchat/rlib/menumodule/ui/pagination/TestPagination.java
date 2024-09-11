@@ -5,7 +5,7 @@ import com.rainchat.rlib.inventory.items.BaseItem;
 import com.rainchat.rlib.inventory.items.modifiers.AmountModifier;
 import com.rainchat.rlib.inventory.items.modifiers.MaterialModifier;
 import com.rainchat.rlib.inventory.menus.BaseClickItem;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import org.bukkit.Material;
 
 import java.util.ArrayList;

@@ -1,11 +1,6 @@
 package com.rainchat.rlib.inventory.menus;
 
-import com.rainchat.rlib.inventory.items.BaseItem;
-import com.rainchat.rlib.inventory.items.ItemBuilder;
-import com.rainchat.rlib.inventory.pagination.BasePagination;
 import com.rainchat.rlib.inventory.pagination.SimplePagination;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

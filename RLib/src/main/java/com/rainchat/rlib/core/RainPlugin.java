@@ -2,7 +2,7 @@ package com.rainchat.rlib.core;
 
 import com.rainchat.rlib.commands.CommandController;
 import com.rainchat.rlib.utils.RUtility;
-import com.rainchat.rlib.utils.config.YamlConfig;
+import com.rainchat.rlib.utils.config.yaml.YamlConfig;
 import com.rainchat.rlib.utils.injection.Injector;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,7 +32,7 @@ public abstract class RainPlugin extends JavaPlugin {
     }
 
     public YamlConfig getYamlConfig(String path) {
-        return new YamlConfig(new File(this.getDataFolder(), path));
+        return new YamlConfig(this, path);
     }
 
     public <T> void bind(T object) {
@@ -44,7 +44,7 @@ public abstract class RainPlugin extends JavaPlugin {
     }
 
     public <T> T getBindClass(Class<T> clazz) {
-        return injector.inject(clazz);
+        return injector.getBind(clazz);
     }
 
     public void registerCommand(Class<?> clazz) {

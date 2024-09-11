@@ -11,9 +11,10 @@ public class ServerLog {
     public String prefix;
     public Plugin plugin;
 
-    public void setup(Plugin pluginS) {
+    public ServerLog setup(Plugin pluginS) {
         plugin = pluginS;
         prefix = "[" + pluginS.getName() + "] ";
+        return this;
     }
 
     public void log(Level level, String text) {

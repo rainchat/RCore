@@ -1,4 +1,4 @@
-package com.rainchat.rlib.messages.placeholder;
+package com.rainchat.rlib.messages.placeholder.base;
 
 public abstract class CustomPlaceholder<T> implements PlaceholderSupply<T> {
     private final String prefix;

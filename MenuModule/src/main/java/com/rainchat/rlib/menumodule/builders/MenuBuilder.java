@@ -1,11 +1,10 @@
 package com.rainchat.rlib.menumodule.builders;
 
 import com.rainchat.rlib.menumodule.ui.inventorys.SimpleMenu;
-import com.rainchat.rlib.inventory.menus.LiteMenu;
 
 import com.rainchat.rlib.utils.builder.Builder;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
-import com.rainchat.rlib.utils.config.Config;
+import com.rainchat.rlib.utils.config.yaml.Config;
 import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 

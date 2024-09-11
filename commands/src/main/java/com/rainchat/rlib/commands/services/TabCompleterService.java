@@ -1,5 +1,6 @@
 package com.rainchat.rlib.commands.services;
 
+import com.rainchat.rlib.commands.annotation.Completion;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
@@ -11,6 +12,7 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class TabCompleterService {
+
     private final Map<String, TriFunction<CommandSender, Class<?>, String, List<String>>> completers = new HashMap<>();
 
     public TabCompleterService() {

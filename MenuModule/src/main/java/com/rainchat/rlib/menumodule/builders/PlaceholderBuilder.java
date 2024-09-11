@@ -3,7 +3,7 @@ package com.rainchat.rlib.menumodule.builders;
 import com.rainchat.rlib.menumodule.ui.placeholder.PlayerReplacements;
 import com.rainchat.rlib.menumodule.ui.placeholder.SimplePlaceholder;
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import com.rainchat.rlib.utils.builder.Builder;
 import org.bukkit.entity.Player;
 

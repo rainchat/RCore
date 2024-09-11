@@ -3,7 +3,7 @@ package com.rainchat.rlib.menumodule.ui.actions;
 import com.rainchat.rlib.inventory.items.BaseItem;
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
 import com.rainchat.rlib.messages.ChatUtil;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 
 import java.util.ArrayList;
 import java.util.List;

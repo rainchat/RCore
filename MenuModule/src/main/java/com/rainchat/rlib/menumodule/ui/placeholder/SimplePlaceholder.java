@@ -1,7 +1,7 @@
 package com.rainchat.rlib.menumodule.ui.placeholder;
 
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
-import com.rainchat.rlib.messages.placeholder.CustomPlaceholder;
+import com.rainchat.rlib.messages.placeholder.base.CustomPlaceholder;
 import org.bukkit.entity.Player;
 
 public abstract class SimplePlaceholder extends CustomPlaceholder<Player> {

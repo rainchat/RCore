@@ -1,7 +1,7 @@
 package com.rainchat.rlib.inventory.items.modifiers;
 
 import com.rainchat.rlib.messages.ChatUtil;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import com.rainchat.rlib.utils.collections.CollectionUtils;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;

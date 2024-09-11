@@ -5,7 +5,7 @@ import com.rainchat.rlib.menumodule.builders.PaginationBuilder;
 import com.rainchat.rlib.menumodule.builders.PlaceholderBuilder;
 import com.rainchat.rlib.inventory.menus.PaginationMenu;
 import com.rainchat.rlib.menumodule.ui.buttons.SelectionButton;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;

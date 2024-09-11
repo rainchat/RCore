@@ -52,7 +52,7 @@ public class SimpleCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String fullCommand = label + " " + String.join(" ", args);
+        String fullCommand = command.getName() + " " + String.join(" ", args);
         Map.Entry<String, Method> bestMatch = findBestMatchEntry(fullCommand, commandMethods);
 
         if (bestMatch != null) {
@@ -112,9 +112,9 @@ public class SimpleCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        String fullCommand = alias + " " + String.join(" ", Arrays.copyOf(args, args.length - 1));
+        String fullCommand = command.getName() + " " + String.join(" ", Arrays.copyOf(args, args.length - 1));
 
-        List<String> subcommands = getSubcommands(alias, args, sender);
+        List<String> subcommands = getSubcommands(command.getName(), args, sender);
         if (!subcommands.isEmpty()) {
             return filterSuggestions(subcommands, args.length > 0 ? args[args.length - 1] : "");
         }
@@ -140,7 +140,7 @@ public class SimpleCommand implements CommandExecutor, TabCompleter {
             try {
                 String[] commandParts = bestMatchEntry.getKey().split(" ");
                 String[] remainingArgs = Arrays.copyOfRange(fullCommand.split(" "), commandParts.length, fullCommand.split(" ").length + 1);
-                List<String> suggestions = (List<String>) bestMatchEntry.getValue().invoke(methodInstances.get(bestMatchEntry.getValue()), sender, command, alias, remainingArgs);
+                List<String> suggestions = (List<String>) bestMatchEntry.getValue().invoke(methodInstances.get(bestMatchEntry.getValue()), sender, command, command.getName(), remainingArgs);
                 return filterSuggestions(suggestions, args.length > 0 ? args[args.length - 1] : "");
             } catch (Exception e) {
                 e.printStackTrace();

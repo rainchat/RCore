@@ -1,16 +1,11 @@
 package com.rainchat.rlib.menumodule.ui.pagination;
 
-import com.google.gson.internal.LinkedTreeMap;
 import com.rainchat.rlib.menumodule.builders.ButtonBuilder;
 import com.rainchat.rlib.menumodule.ui.buttons.SelectionButton;
-import com.rainchat.rlib.menumodule.ui.buttons.SimpleItem;
-import com.rainchat.rlib.menumodule.ui.inventorys.SimpleMenu;
 import com.rainchat.rlib.menumodule.ui.placeholder.TargetPlaceholder;
-import com.rainchat.rlib.inventory.items.BaseItem;
-import com.rainchat.rlib.inventory.items.modifiers.PlayerHeadModifier;
 import com.rainchat.rlib.inventory.menus.BaseClickItem;
 import com.rainchat.rlib.inventory.pagination.SimplePagination;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

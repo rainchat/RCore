@@ -34,6 +34,7 @@ public final class CommandController {
         this.commandMap = getCommandMap();
     }
 
+
     private static PluginCommand getCommand(String name, Plugin plugin) {
         PluginCommand command = null;
 

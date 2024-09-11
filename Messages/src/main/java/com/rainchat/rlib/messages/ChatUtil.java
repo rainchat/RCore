@@ -1,6 +1,6 @@
 package com.rainchat.rlib.messages;
 
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import com.rainchat.rlib.messages.ractionbar.ActionBarHolder;
 import com.rainchat.rlib.messages.tellraw.TellrawHolder;
 import com.rainchat.rlib.messages.title.TitleHolder;

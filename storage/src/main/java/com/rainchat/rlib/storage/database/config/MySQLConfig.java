@@ -36,21 +36,13 @@ public class MySQLConfig implements DatabaseConfig {
 
     @Override
     public String getTypeSyntax(String type, int length) {
-        switch (type) {
-            case "int":
-                return "INTEGER";
-            case "string":
-                return "VARCHAR(" + length + ")";
-            case "double":
-                return "REAL";
-            case "boolean":
-                return "BOOLEAN";
-            case "blob":
-                return "BLOB";
-            case "autoIncrement":
-                return "AUTO_INCREMENT";
-            default:
-                return "BLOB";
-        }
+        return switch (type) {
+            case "int" -> "INT";
+            case "string" -> "VARCHAR(" + length + ")";
+            case "double" -> "DOUBLE";
+            case "boolean" -> "BOOLEAN";
+            case "autoIncrement" -> "AUTO_INCREMENT";
+            default -> "BLOB";
+        };
     }
 }

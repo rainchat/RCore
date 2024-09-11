@@ -96,8 +96,8 @@ public class MathUtil {
         return playerList.get(random.nextInt(playerList.size()));
     }
 
-    public static Long roundAvoid(long value, int places) {
-        long scale = (long) Math.pow(10, places);
+    public static double roundAvoid(Double value, int places) {
+        double scale = Math.pow(10, places);
         return Math.round(value * scale) / scale;
     }
 

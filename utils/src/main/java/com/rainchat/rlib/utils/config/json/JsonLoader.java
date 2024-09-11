@@ -1,4 +1,4 @@
-package com.rainchat.rlib.utils.config;
+package com.rainchat.rlib.utils.config.json;
 
 import org.bukkit.plugin.Plugin;
 

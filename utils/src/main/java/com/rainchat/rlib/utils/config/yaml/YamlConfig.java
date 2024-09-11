@@ -1,4 +1,4 @@
-package com.rainchat.rlib.utils.config;
+package com.rainchat.rlib.utils.config.yaml;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;

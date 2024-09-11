@@ -1,7 +1,7 @@
 package com.rainchat.rlib.inventory.menus;
 
 import com.rainchat.rlib.inventory.items.ItemBuilder;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;

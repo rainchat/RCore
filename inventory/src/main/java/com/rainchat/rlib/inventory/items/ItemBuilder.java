@@ -3,7 +3,7 @@ package com.rainchat.rlib.inventory.items;
 
 import com.rainchat.rlib.messages.ChatUtil;
 import com.rainchat.rlib.messages.Color;
-import com.rainchat.rlib.messages.placeholder.PlaceholderSupply;
+import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -97,7 +97,6 @@ public class ItemBuilder extends BaseItem {
                 new ItemStack(Material.PLAYER_HEAD),
                 "{SkullOwner:{Id:[I;" + (less * most) + "," + (less >> 23) + "," + (most / less) + "," + (most * 8731) + "],Properties:{textures:[{Value:\"" + base64 + "\"}]}}}"
         );
-
     }
 
 
