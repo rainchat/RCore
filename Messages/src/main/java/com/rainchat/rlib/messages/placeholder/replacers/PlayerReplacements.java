@@ -11,7 +11,7 @@ public class PlayerReplacements extends CustomPlaceholder<Player> {
     private final OfflinePlayer player;
 
     public PlayerReplacements(OfflinePlayer player) {
-        super("player_");
+        super("player_"); // %player_name%
         this.player = player;
     }
 
