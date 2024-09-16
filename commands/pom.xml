@@ -3,7 +3,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>commands</artifactId>
-    <version>1.1</version>
 
     <name>commands</name>
     <url>http://maven.apache.org</url>
