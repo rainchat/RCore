@@ -2,8 +2,6 @@ package com.rainchat.rlib.inventory.menus;
 
 import com.rainchat.rlib.inventory.items.ItemBuilder;
 import com.rainchat.rlib.messages.placeholder.base.PlaceholderSupply;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,9 +26,7 @@ public class LiteMenu implements InventoryHolder, Listener {
 
     private Inventory inventory;
 
-    @Getter@Setter
     private int guiSize;
-    @Setter@Getter
     private String guiName;
     private HashMap<Integer, BaseClickItem> clickableItems = new HashMap<>();
     private List<PlaceholderSupply<?>> globalPlaceholder;
@@ -80,6 +76,21 @@ public class LiteMenu implements InventoryHolder, Listener {
         player.openInventory(inventory);
     }
 
+    public int getGuiSize() {
+        return guiSize;
+    }
+
+    public void setGuiSize(int guiSize) {
+        this.guiSize = guiSize;
+    }
+
+    public String getGuiName() {
+        return guiName;
+    }
+
+    public void setGuiName(String guiName) {
+        this.guiName = guiName;
+    }
 
     public void close(Player player) {
         player.closeInventory();

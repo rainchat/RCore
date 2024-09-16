@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import com.rainchat.rlib.event.EventBus;
 import com.rainchat.rlib.event.EventListenerBuilder;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -50,7 +49,6 @@ public class BukkitEventBus implements EventBus {
         HandlerList.unregisterAll(listener);
     }
 
-    @RequiredArgsConstructor
     static class EventListenerBuilderImpl<T extends Event> implements EventListenerBuilder<T> {
         private EventPriority priority = EventPriority.NORMAL;
         private boolean ignoreCancelled = false;
@@ -59,6 +57,11 @@ public class BukkitEventBus implements EventBus {
 
         private final Class<T> eventType;
         private final JavaPlugin plugin;
+
+        public EventListenerBuilderImpl(Class<T> eventType, JavaPlugin plugin) {
+            this.eventType = eventType;
+            this.plugin = plugin;
+        }
 
         @Override
         public EventListenerBuilder<T> priority(EventPriority priority) {

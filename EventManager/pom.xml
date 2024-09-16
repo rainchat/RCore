@@ -4,6 +4,13 @@
 
 
     <artifactId>EventManager</artifactId>
+
+    <parent>
+        <groupId>com.rainchat.rlib</groupId>
+        <artifactId>RCore</artifactId>
+        <version>1.1</version>
+    </parent>
+
     <build>
         <plugins>
             <plugin>
@@ -16,12 +23,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <parent>
-        <groupId>com.rainchat.rlib</groupId>
-        <artifactId>RCore</artifactId>
-        <version>1.1</version>
-    </parent>
 
 
 </project>

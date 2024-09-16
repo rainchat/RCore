@@ -7,7 +7,7 @@ import com.rainchat.rlib.inventory.items.ItemModifierBuilder;
 import com.rainchat.rlib.utils.RUtility;
 import com.rainchat.rlib.utils.collections.CaseInsensitiveStringMap;
 import com.rainchat.rlib.utils.scheduler.RScheduler;
-import lombok.Getter;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +17,6 @@ import java.util.*;
 public class SelectionButton extends SimpleItem implements Cloneable {
 
     private Map<String, List<Action>> actionsMap = new HashMap<>();
-    @Getter
     private int slot;
 
     public void setFromSection(Map<String, Object> section) {
@@ -62,6 +61,10 @@ public class SelectionButton extends SimpleItem implements Cloneable {
                 action.addToTask(baseClick.getWhoClicked().getUniqueId(), scheduler, getInventory());
             });
         });
+    }
+
+    public int getSlot() {
+        return slot;
     }
 
     @Override
