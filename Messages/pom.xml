@@ -3,6 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>messages</artifactId>
+    <version>2.1</version>
 
     <parent>
         <groupId>ru.rainchat.rlib</groupId>

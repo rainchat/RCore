@@ -4,6 +4,7 @@
 
 
     <artifactId>EventManager</artifactId>
+    <version>2.1</version>
 
     <parent>
         <groupId>ru.rainchat.rlib</groupId>
