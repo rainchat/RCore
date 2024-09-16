@@ -4,7 +4,8 @@
 
     <artifactId>commands</artifactId>
     <groupId>ru.rainchat</groupId>
-    <version>1.0</version>
+
+
     <name>commands</name>
     <url>http://maven.apache.org</url>
 
