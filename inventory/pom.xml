@@ -33,14 +33,14 @@
         <dependency>
             <groupId>ru.rainchat.rlib</groupId>
             <artifactId>messages</artifactId>
-            <version>1.1</version>
-            <scope>compile</scope>
+            <version>2.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>ru.rainchat.rlib</groupId>
             <artifactId>utils</artifactId>
-            <version>1.1</version>
-            <scope>compile</scope>
+            <version>2.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

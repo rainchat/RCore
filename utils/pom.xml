@@ -42,7 +42,7 @@
         <dependency>
             <groupId>ru.rainchat.rlib</groupId>
             <artifactId>messages</artifactId>
-            <version>1.1</version>
+            <version>2.1</version>
             <scope>compile</scope>
         </dependency>
         <!--PlaceholderAPI dependency-->
